@@ -1,0 +1,35 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #14141c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#glcanvas {
+  display: block;
+  width: 1280px;
+  height: 720px;
+  max-width: 100vw;
+  max-height: 100vh;
+  aspect-ratio: 16 / 9;
+  margin: auto;
+}
+
+#hud {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  color: #e6e6e6;
+  white-space: pre;
+  pointer-events: none;
+  user-select: none;
+  line-height: 18px;
+  text-shadow: 1px 1px 0 #000;
+}
