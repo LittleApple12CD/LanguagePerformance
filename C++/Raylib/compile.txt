@@ -1,0 +1,33 @@
+windres src/icon.rc -O coff -o src/icon.res
+
+#CMake
+mkdir&cd dist
+cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
+ninja
+
+#MinGW
+g++ -O2 -std=c++17 \
+    src/*.cpp \
+    src/icon.res \
+    -o dist/LanguagePerformance.exe \
+    -I/mingw64/include \
+    -L/mingw64/lib \
+    -lraylib -lopengl32 -lgdi32 -lwinmm
+
+# Window
+
+g++ -O2 -std=c++17 \
+    src/*.cpp \
+    src/icon.res \
+    -o dist/LanguagePerformance.exe \
+    -I/mingw64/include \
+    -L/mingw64/lib \
+    -mwindows \
+    -lraylib -lopengl32 -lgdi32 -lwinmm
+
+
+cp /ucrt64/bin/libraylib.dll dist/
+cp /ucrt64/bin/glfw3.dll dist/
+cp /ucrt64/bin/libgcc_s_seh-1.dll dist/
+cp /ucrt64/bin/libstdc++-6.dll dist/
+cp /ucrt64/bin/libwinpthread-1.dll dist/
