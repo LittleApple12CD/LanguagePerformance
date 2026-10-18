@@ -17,7 +17,7 @@ pub fn setup_cubes(
 ) {
     commands.spawn((
         Camera3d::default(),
-        Transform::from_xyz(0.0, 0.0, -8.0).looking_at(Vec3::ZERO, Vec3::Y),
+        Transform::from_xyz(0.0, 0.0, -10.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
 
     commands.spawn((
@@ -53,7 +53,6 @@ pub fn update_cubes(
 
     let t = time.elapsed_secs();
     for (mut transform, rot) in &mut query {
-        // 直接由时间推导绝对角度，避免每帧增量旋转的累积误差
         let angle = rot.initial_angle + rot.speed * t;
         transform.rotation = Quat::from_axis_angle(*rot.axis, angle);
     }
