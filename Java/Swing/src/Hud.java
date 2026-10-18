@@ -28,8 +28,6 @@ public class Hud {
         int y = 6;
         for (String line : lines) {
             int w = g.getFontMetrics().stringWidth(line);
-            g.setColor(new Color(0, 0, 0, 150));
-            g.fillRect(4, y, w + 8, 16);
             g.setColor(new Color(230, 230, 230));
             g.drawString(line, 8, y + 13);
             y += 18;
