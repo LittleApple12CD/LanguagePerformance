@@ -1,0 +1,12 @@
+go mod init languageperformance
+go mod tidy
+
+go-winres simply --icon icon.ico --manifest gui
+
+go build -o dist/languageperformance.exe main.go
+
+# Window
+go build -ldflags "-H=windowsgui" -o dist/languageperformance.exe .
+
+# Max Performance
+go build -ldflags "-s -w -H=windowsgui -extldflags=-static" -gcflags="all=-l=4" -o dist/languageperformance.exe .
