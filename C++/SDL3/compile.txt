@@ -1,0 +1,75 @@
+mkdir -p dist
+
+/c/dxc/bin/x64/dxc.exe -T vs_6_0 -E main shaders/cube.vert.hlsl -Fo dist/shaders/cube.vert.dxil
+/c/dxc/bin/x64/dxc.exe -T ps_6_0 -E main shaders/cube.frag.hlsl -Fo dist/shaders/cube.frag.dxil
+
+windres src/icon.rc -o src/icon.o
+
+g++ -O2 -std=c++17 \
+    src/*.cpp \
+    src/icon.o \
+    -o dist/LanguagePerformance.exe \
+    -I/ucrt64/include \
+    -L/ucrt64/lib \
+    -lSDL3 -lSDL3_ttf
+
+# Window
+
+g++ -O2 -std=c++17 \
+    src/*.cpp \
+    src/icon.o \
+    -o dist/LanguagePerformance.exe \
+    -I/ucrt64/include \
+    -L/ucrt64/lib \
+    -mwindows \
+    -lSDL3 -lSDL3_ttf
+
+# Max Performance
+
+g++ -O3 -ffast-math -mavx -mfma -fopenmp -flto=auto -std=c++17 \
+    src/*.cpp \
+    src/icon.o \
+    -o dist/LanguagePerformance.exe \
+    -I/ucrt64/include \
+    -L/ucrt64/lib \
+    -mwindows \
+    -lSDL3 -lSDL3_ttf
+
+# Only your computer can launcher
+
+g++ -O3 -march=native -ffast-math -mavx -mfma -fopenmp -flto=auto -fprofile-generate -std=c++17 \
+    src/*.cpp \
+    src/icon.o \
+    -o dist/LanguagePerformance.exe \
+    -I/ucrt64/include \
+    -L/ucrt64/lib \
+    -mwindows \
+    -lSDL3 -lSDL3_ttf
+
+g++ -O3 -march=native -ffast-math -mavx -mfma -fopenmp -flto=auto -fprofile-use -fprofile-correction -std=c++17 \
+    src/*.cpp \
+    src/icon.o \
+    -o dist/LanguagePerformance.exe \
+    -I/ucrt64/include \
+    -L/ucrt64/lib \
+    -mwindows \
+    -lSDL3 -lSDL3_ttf
+
+cp /ucrt64/bin/SDL3.dll dist/
+cp /ucrt64/bin/SDL3_ttf.dll dist/
+cp /ucrt64/bin/libgcc_s_seh-1.dll dist/
+cp /ucrt64/bin/libstdc++-6.dll dist/
+cp /ucrt64/bin/libwinpthread-1.dll dist/
+cp /ucrt64/bin/libfreetype-6.dll dist/
+cp /ucrt64/bin/libharfbuzz-0.dll dist/
+cp /ucrt64/bin/libbrotlidec.dll dist/
+cp /ucrt64/bin/libbrotlicommon.dll dist/
+cp /ucrt64/bin/libbz2-1.dll dist/
+cp /ucrt64/bin/libpng16-16.dll dist/
+cp /ucrt64/bin/zlib1.dll dist/
+cp /ucrt64/bin/libglib-2.0-0.dll dist/
+cp /ucrt64/bin/libgraphite2.dll dist/
+cp /ucrt64/bin/libintl-8.dll dist/
+cp /ucrt64/bin/libpcre2-8-0.dll dist/
+cp /ucrt64/bin/libiconv-2.dll dist/
+cp /ucrt64/bin/libgomp-1.dll dist/
